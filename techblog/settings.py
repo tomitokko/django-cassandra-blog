@@ -15,6 +15,7 @@ import os
 from cassandra import ConsistencyLevel
 from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a$3sng^e(3qy2oia)ji@=04+p-j)4lh3hjfs5354k17&o(@md3'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -95,7 +96,7 @@ DATABASES = {
         'NAME': 'tech_blog',
         'OPTIONS': {
             'connection': {
-                'auth_provider': PlainTextAuthProvider('WSbuLmzAbweUSKaTUZhPufjZ', 'Ha8Wb,hn2aGLa3g9QU0.3W_p0wM.gcOn84dAS_j7yjIodlIZZa-lFTqY4Hhaoyy2KfSY40u_2Dc_KuG2,rH0r3F6dmmPL97jJ0HoIiIZcOFj3c_kL0ihtX+HEPEfyINz'),
+                'auth_provider': PlainTextAuthProvider(config("CLIENT_ID"), config("CLIENT_SECRET")),
                 'cloud': {
                     'secure_connect_bundle': 'C:/Users/larat/Documents/Tomi Files/projects/tech_blog/techblog/secure-connect-techblog.zip'
                 }
